@@ -21,8 +21,28 @@ def solve(a, heard):
     return num_iters
 
 
-if __name__ == "__main__":
+def faster_solve(a, heard):
+    heard_len = len(heard)
+    a_dict = {}
+
+    for idx, letter in enumerate(a):
+        a_dict[letter] = idx
+
+    num_iters = 0
+    for i in range(1, heard_len):
+        if a_dict[heard[i]] <= a_dict[heard[i-1]]:
+            num_iters += 1
+
+    num_iters += 1
+    return num_iters
+
+
+def main():
     alpha = input()
     heard = input()
-    counter = solve(alpha, heard)
+    counter = faster_solve(alpha, heard)
     print(counter)
+
+
+if __name__ == '__main__':
+    main()
