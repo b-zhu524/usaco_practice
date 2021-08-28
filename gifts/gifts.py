@@ -16,19 +16,14 @@ def solve(B, N, wishes):
         if wishes[i][0] > largest_price_include:
             largest_price_include = wishes[i][0]
 
-        budget -= p + s
+        budget -= (p + s)
     happy_cows = i
 
     # apply coupon to opt 1
-    opt1_happy_cows = happy_cows
     opt1_budget = budget + (largest_price_include / 2)
-    for i in range(happy_cows, N):
-        if budget <= 0:
-            break
-
-        cost = sum(wishes[i])
-        if opt1_budget >= cost:
-            return opt1_happy_cows + 1
+    cost = sum(wishes[happy_cows])
+    if opt1_budget >= cost:
+        return happy_cows + 1
 
     # apply coupon to opt2
     opt2_happy_cows = happy_cows
@@ -36,10 +31,9 @@ def solve(B, N, wishes):
     for i in range(happy_cows, N):
         cost = cost_with_coupon(wishes[i])
         if cost <= opt2_budget:
-            opt2_happy_cows += 1
-            return opt2_happy_cows
+            return opt2_happy_cows + 1
 
-    return max(opt1_happy_cows, opt2_happy_cows)
+    return happy_cows
 
 
 def main():
