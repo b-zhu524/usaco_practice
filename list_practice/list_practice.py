@@ -21,20 +21,25 @@ def largest_sublist(a):
 
 
 def faster_largest_sublist(a):
-    best_sum_i = a[0]
-    best_start_i = 0
-    largest_sum = best_sum_i
-    best_start, best_end = best_start_i, 0
+    current_best_start = 0
+    current_best_sum = a[0]
+
+    t_best_sum = current_best_sum
+    t_best_start = current_best_start
+    t_best_end = 0
+
     for i in range(1, len(a)):
-        if a[i] > best_sum_i + a[i]:
-            best_sum_i = a[i]
-            best_start_i = i
+        if current_best_sum < 0:
+            current_best_sum = a[i]
+            current_best_start = i
         else:
-            best_sum_i += a[i]
-        if best_sum_i > largest_sum:
-            largest_sum = best_sum_i
-            best_start, best_end = best_start_i, i
-    return best_start, best_end, largest_sum
+            current_best_sum += a[i]
+
+        if t_best_sum < current_best_sum:
+            t_best_sum = current_best_sum
+            t_best_start = current_best_start
+            t_best_end = i
+    return t_best_start, t_best_end, t_best_sum
 
 
 def test_reverse_list():
