@@ -18,6 +18,37 @@ def solve(N, cow_ids):
     return best_in_row
 
 
+def solve2(N, cow_ids):
+    unique_ids = set(cow_ids)
+    if len(unique_ids) == 1:
+        return N
+
+    best_in_row = 0
+
+    for to_be_removed in unique_ids:
+        current_cow_ids = []
+        # build new list with 1 id removed
+        for cow_id in cow_ids:
+            if cow_id != to_be_removed:
+                current_cow_ids.append(cow_id)
+        # count maximum consecutive ids
+        count = 0
+        best_count = 0
+        prev_cow = None
+        for curr_cow in current_cow_ids:
+            if curr_cow != prev_cow:
+                best_count = max(best_count, count)
+                count = 1
+            else:
+                count += 1
+            prev_cow = curr_cow
+        # in case last count is best
+        best_count = max(best_count, count)
+
+        best_in_row = max(best_in_row, best_count)
+    return best_in_row
+
+
 def main():
     with open("cowrow.in", "r") as fin:
         N = int(fin.readline().strip())
@@ -40,7 +71,7 @@ def test():
                 cow_ids.append(cow)
 
         with open(f"test_outs/{j}.out", "w") as fout:
-            fout.write(f"{solve(N, cow_ids)}\n")
+            fout.write(f"{solve2(N, cow_ids)}\n")
 
 
 if __name__ == "__main__":
