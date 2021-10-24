@@ -19,6 +19,9 @@ def solve(N, traffic):
         else:
             low -= traffic[i][2]
             high -= traffic[i][1]
+
+        low = max(low, 0)
+        high = min(high, 1000)
     forward_res = (low, high)
 
     # backward
@@ -33,6 +36,9 @@ def solve(N, traffic):
         else:
             low -= traffic[i][2]
             high -= traffic[i][1]
+        low = max(low, 0)
+        high = min(high, 1000)
+
     backward_res = (low, high)
 
     return backward_res, forward_res
