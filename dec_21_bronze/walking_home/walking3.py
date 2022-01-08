@@ -19,7 +19,7 @@ def num_paths(field, k, n):
         for t in range(1, n-1):
             rdr = True
             drd = True
-            for i in range(1, n-1):
+            for i in range(1, t+1):
                 if field[0][i] == "H":
                     rdr = False
                 if field[i][0] == "H":
@@ -31,7 +31,7 @@ def num_paths(field, k, n):
                 if field[t][i] == "H":
                     drd = False
 
-            for i in range(t, n):
+            for i in range(t+1, n):
                 if field[n-1][i] == "H":
                     rdr = False
                 if field[i][n-1] == "H":
@@ -58,12 +58,12 @@ def num_paths(field, k, n):
                         rdrd = False
                     if field[t1][i] == "H":
                         drdr = False
-                for i in range(t1, n):
+                for i in range(t1+1, n):
                     if field[t2][i] == "H":
                         rdrd = False
                     if field[i][t2] == "H":
                         drdr = False
-                for i in range(t2, n):
+                for i in range(t2+1, n):
                     if field[i][n-1] == "H":
                         rdrd = False
                     if field[n-1][i] == "H":

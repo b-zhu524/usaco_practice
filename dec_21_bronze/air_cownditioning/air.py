@@ -66,7 +66,7 @@ def main():
             t.append(int(t_i))
 
     with open("air.out", "w") as fout:
-        print(solve(n, p, t))
+        solve(n, p, t)
 
 
 if __name__ == '__main__':
