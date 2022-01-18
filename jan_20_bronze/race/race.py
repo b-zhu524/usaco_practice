@@ -1,43 +1,25 @@
 def solve(n, k, x):
-    dist = (1 + x) * x // 2
-    if dist == k:
-        return x
+    s = 1
+    d = 0
+    t = 0
 
-    if dist > k:
-        step = x
-        time = x
-        while dist > k:
-            dist -= step
-            step -= 1
-            time -= 1
-        if dist < k:
-            time += 1
-        return time
+    while s < x and d <= k:
+        t += 1
+        d += s
+        s += 1
 
-    start_dist = (x * (x - 1)) // 2
-    remaining_dist_upper = k - start_dist
+    if d >= k:
+        return t
 
-    peak_upper = remaining_dist_upper - 2 * x
-    peak_lower = x
-    if peak_upper > peak_lower:
-        peak_speed = peak_upper
-        while peak_speed > peak_lower and (x + peak_speed - 1) * (peak_speed - x) > remaining_dist_upper:
-            peak_speed -= 1
-    else:
-        peak_speed = peak_lower
+    while k-d >= 2*s:
+        t += 2
+        d += 2*s
+        s += 1
 
-    time = x - 1
-    if peak_speed > x:
-        l_dist = (x+peak_speed-1)*(peak_speed-x) // 2
-        time += 2*(peak_speed-x)
-    else:
-        l_dist = 0
-
-    remaining_dist = remaining_dist_upper - 2*l_dist
-    time += remaining_dist // peak_speed
-    if remaining_dist % peak_speed:
-        time += 1
-    return time
+    while d < k:
+        t += 1
+        d += s
+    return t
 
 
 def main():
