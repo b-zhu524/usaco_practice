@@ -45,7 +45,21 @@ def binary_search(target, sorted_a):
     return -1
 
 
+def binary_search_recursion(a, target, start, end):
+    if start > end:
+        return -1
+
+    m = (start + end) // 2
+    if a[m] == target:
+        return m
+
+    if target < a[m]:
+        return binary_search_recursion(a, target, start, m-1)
+    else:
+        return binary_search_recursion(a, target, m+1, end)
+
+
 if __name__ == '__main__':
-    a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    out = binary_search(10, a)
+    a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    out = binary_search_recursion(a, 10, 0, len(a)-1)
     print(out)
