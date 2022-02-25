@@ -1,0 +1,6 @@
+WARNING:root:before the first loop i=0, a=[1, 2, 3]
+WARNING:root:after the first loop i=0, a=[3, 2, 3]
+WARNING:root:before the first loop i=1, a=[3, 2, 3]
+WARNING:root:after the first loop i=1, a=[3, 4, 3]
+WARNING:root:before the first loop i=2, a=[3, 4, 3]
+WARNING:root:after the first loop i=2, a=[3, 4, 5]
